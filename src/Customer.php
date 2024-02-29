@@ -24,7 +24,8 @@ class Customer
     {
         $totalAmount = 0;
         $frequentRenterPoints = 0;
-        $result = "Rental Record for " . $this->getName() . "\n";
+        $result = "";
+        // $result = "<h1>Rental Record for " . $this->getName() . "\n</h1>";
 
         // determine amounts for each line
         foreach ($this->rentals as $rental) {
@@ -50,19 +51,22 @@ class Customer
             $frequentRenterPoints++;
 
             // add bonus for a two day new release rental
-            if (($rental->getMovie()->getPriceCode() == Movie::NEW_RELEASE) &&
-                    $rental->getDaysRented() > 1) $frequentRenterPoints++;
+            if (($rental->getMovie()->getPriceCode() == Movie::NEW_RELEASE) && $rental->getDaysRented() > 1) {
+                $frequentRenterPoints++;
+            }
 
             // show figures for this rental
-            $result .= "\t" . $rental->getMovie()->getTitle() . "\t" .
-                        $thisAmount . "\n";
+            $result .= '<p class="movie-item">';
+            $result .= $rental->getMovie()->getTitle() . ': <strong>' . $thisAmount . '</strong>';
+            $result .= '</p>';
             $totalAmount += $thisAmount;
         }
 
         // add footer lines
-        $result .= "Amount owed is " . $totalAmount . "\n";
-        $result .= "You earned " . $frequentRenterPoints .
-                " frequent renter points";
+        $result .= '<footer class="info-footer">';
+        $result .= '<p>Amount owed is : <i>' . $totalAmount . '</i></p>';
+        $result .= '<p>You earned <i>' . $frequentRenterPoints . '</i> frequent renter points</p>';
+        $result .= '</footer">';
 
         return $result;
     }
