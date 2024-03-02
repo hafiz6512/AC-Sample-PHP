@@ -56,17 +56,17 @@ class Customer
             }
 
             // show figures for this rental
-            $result .= '<p class="movie-item">';
+            $result .= '<p class="movie-list-item">';
             $result .= $rental->getMovie()->getTitle() . ': <strong>' . $thisAmount . '</strong>';
             $result .= '</p>';
             $totalAmount += $thisAmount;
         }
 
         // add footer lines
-        $result .= '<footer class="info-footer">';
+        $result .= '<div class="info-footer">';
         $result .= '<p>Amount owed is : <i>' . $totalAmount . '</i></p>';
         $result .= '<p>You earned <i>' . $frequentRenterPoints . '</i> frequent renter points</p>';
-        $result .= '</footer">';
+        $result .= '</div">';
 
         return $result;
     }
